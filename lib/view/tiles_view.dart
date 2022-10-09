@@ -24,6 +24,7 @@ class TilesView extends StatelessWidget {
             else
               TileView(
                 number: numbers[i],
+                // 順番が正しい時はタイルの色を緑、間違っているときは青にする
                 color: numbers[i] == i+1 ? Colors.green : Colors.blue,
                 onPressed: () {},
               )
