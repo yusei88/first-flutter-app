@@ -6,21 +6,22 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'スライドパズル',
-            style: TextStyle(fontSize: 32),
-          ),
-          const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: () => {},
-            child: const Text('スタート'),
-          )
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'スライドパズル',
+              style: TextStyle(fontSize: 32),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () => {},
+              child: const Text('スタート'),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
