@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_flutter_app/view/tiles_view.dart';
 
 class PuzzlePage extends StatefulWidget {
   const PuzzlePage({Key? key}) : super(key: key);
@@ -26,8 +27,27 @@ class _PuzzlePageState extends State<PuzzlePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('スライドパズル'),
+        actions: [
+          // 保存したタイルの状態を読み込むボタン
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.play_arrow),
+          ),
+
+          // 現在のタイルの状態を保存するボタン
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.save),
+          ),
+        ],
       ),
-      body: const Text('メインコンテンツ'),
+      body: const Center(
+        child: TilesView(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: const Icon(Icons.shuffle),
+      ),
     );
   }
 }
