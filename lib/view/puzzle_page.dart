@@ -10,17 +10,7 @@ class PuzzlePage extends StatefulWidget {
 
 class _PuzzlePageState extends State<PuzzlePage> {
   // 現在のタイルの状態
-  List<int> tileNumbers = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    0,
-  ];
+  List<int> tileNumbers = [5, 2, 3, 4, 1, 6, 7, 8, 0];
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +31,10 @@ class _PuzzlePageState extends State<PuzzlePage> {
           ),
         ],
       ),
-      body: const Center(
-        child: TilesView(),
+      body: Center(
+        child: Center(
+          child: TilesView(numbers: tileNumbers),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {},
