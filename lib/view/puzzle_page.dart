@@ -8,7 +8,7 @@ class PuzzlePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Providerからタイルリストとシャッフルメソッドを取り出し
+    // Providerからタイルリストを取り出し
     List<int> numbers = ref.watch(tilesProvider);
     return Scaffold(
       appBar: AppBar(
@@ -16,13 +16,14 @@ class PuzzlePage extends ConsumerWidget {
         actions: [
           // 保存したタイルの状態を読み込むボタン
           IconButton(
-            onPressed: () {},
+            onPressed: () => {ref.read(tilesProvider.notifier).loadTiles()},
             icon: const Icon(Icons.play_arrow),
           ),
 
           // 現在のタイルの状態を保存するボタン
           IconButton(
-            onPressed: () {},
+            onPressed: () =>
+                {ref.read(tilesProvider.notifier).saveTiles(numbers)},
             icon: const Icon(Icons.save),
           ),
         ],

@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'package:my_first_flutter_app/config/config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TilesNotifier extends StateNotifier<List<int>> {
   // Tileのリストを初期化
@@ -55,6 +58,25 @@ class TilesNotifier extends StateNotifier<List<int>> {
   void shuffleTile(List<int> numbers) {
     numbers.shuffle();
     state = [...numbers];
+  }
+
+  /// タイル保存メソッド
+  /// 引数 List<int>型：現在のタイル
+  void saveTiles(List<int> numbers) async {
+    final value = jsonEncode(numbers);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(SAVE_KEY, value);
+  }
+
+  /// タイル読み込みメソッド
+  void loadTiles() async {
+    final prefs = await SharedPreferences.getInstance();
+    final value = prefs.getString(SAVE_KEY);
+    if (value != null) {
+      final numbers =
+          (jsonDecode(value) as List<dynamic>).map((v) => v as int).toList();
+      state = [...numbers];
+    }
   }
 }
 
