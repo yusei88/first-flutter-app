@@ -4,6 +4,8 @@ import 'package:my_first_flutter_app/view/tile_view.dart';
 import 'package:my_first_flutter_app/view_model/tiles_provider.dart';
 
 class TilesView extends ConsumerWidget {
+  const TilesView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<int> numbers = ref.watch(tilesProvider);
