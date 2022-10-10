@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_first_flutter_app/view/tiles_view.dart';
+import 'package:my_first_flutter_app/view_model/tiles_provider.dart';
 
-class PuzzlePage extends StatefulWidget {
+class PuzzlePage extends ConsumerWidget {
   const PuzzlePage({Key? key}) : super(key: key);
 
   @override
-  _PuzzlePageState createState() => _PuzzlePageState();
-}
-
-class _PuzzlePageState extends State<PuzzlePage> {
-  // 現在のタイルの状態
-  List<int> tileNumbers = [5, 2, 3, 4, 1, 6, 7, 8, 0];
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Providerからタイルリストとシャッフルメソッドを取り出し
+    List<int> numbers = ref.watch(tilesProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('スライドパズル'),
@@ -33,11 +29,12 @@ class _PuzzlePageState extends State<PuzzlePage> {
       ),
       body: Center(
         child: Center(
-          child: TilesView(numbers: tileNumbers),
+          child: TilesView(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () =>
+            {ref.read(tilesProvider.notifier).shuffleTile(numbers)},
         child: const Icon(Icons.shuffle),
       ),
     );

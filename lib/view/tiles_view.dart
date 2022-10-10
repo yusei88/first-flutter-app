@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_first_flutter_app/view/tile_view.dart';
+import 'package:my_first_flutter_app/view_model/tiles_provider.dart';
 
-class TilesView extends StatelessWidget {
-  final List<int> numbers;
-
-  const TilesView({
-    Key? key,
-    required this.numbers,
-  }) : super(key: key);
-
+class TilesView extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<int> numbers = ref.watch(tilesProvider);
     return GridView.count(
         shrinkWrap: true,
         crossAxisCount: 3,
@@ -23,11 +19,12 @@ class TilesView extends StatelessWidget {
               Container()
             else
               TileView(
-                number: numbers[i],
-                // 順番が正しい時はタイルの色を緑、間違っているときは青にする
-                color: numbers[i] == i+1 ? Colors.green : Colors.blue,
-                onPressed: () {},
-              )
+                  number: numbers[i],
+                  // 順番が正しい時はタイルの色を緑、間違っているときは青にする
+                  color: numbers[i] == i + 1 ? Colors.green : Colors.blue,
+                  onPressed: () => ref
+                      .read(tilesProvider.notifier)
+                      .swapTile(numbers, numbers[i]))
         ]);
   }
 }
